@@ -80,9 +80,12 @@ def main():
     text = list(nltk.corpus.brown.tagged_sents(tagset='universal'))
     train = addS(text)
     pos, tags, uni = posBigram(train)
-    output_dict = {'pos': pos, 'tags': tags, 'uni': uni}
-    with open('../data/pos_dict.json', 'w') as outfile:
-        json.dump(output_dict, outfile, indent=4, sort_keys=True)
+    with open('data/pos.json', 'w') as pos_out:
+        json.dump(pos, pos_out, indent=4, sort_keys=True)
+    with open('data/tags.json', 'w') as tags_out:
+        json.dump(tags, tags_out, indent=4, sort_keys=True)
+    with open('data/uni.json', 'w') as uni_out:
+        json.dump(uni, uni_out, indent=4, sort_keys=True)
 
 if __name__ == '__main__':
     main()
