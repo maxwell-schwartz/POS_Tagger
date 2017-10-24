@@ -2,6 +2,7 @@
 # POS_Tagger.py
 # Takes a sentence as input and returns the part of speech of each word.
 
+import json
 import nltk
 
 def addS(tagged_sents):
@@ -72,13 +73,19 @@ def posBigram(tagged_sents):
         uni[word].sort()
         uni[word] = uni[word][-1][1]
     
-    return posDict, tagList, uni
+    return posDict, list(tagList), uni
 
 def main():
     # this initial formatting takes some time
     text = list(nltk.corpus.brown.tagged_sents(tagset='universal'))
     train = addS(text)
     pos, tags, uni = posBigram(train)
-    print(uni)
+    with open('data/pos.json', 'w') as pos_out:
+        json.dump(pos, pos_out, indent=4, sort_keys=True)
+    with open('data/tags.json', 'w') as tags_out:
+        json.dump(tags, tags_out, indent=4, sort_keys=True)
+    with open('data/uni.json', 'w') as uni_out:
+        json.dump(uni, uni_out, indent=4, sort_keys=True)
 
-main()
+if __name__ == '__main__':
+    main()
