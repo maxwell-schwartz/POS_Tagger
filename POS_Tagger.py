@@ -97,12 +97,12 @@ def main():
         # add open and close sentence things
         newSent.insert(0, u'<s>')
         newSent.append(u'</s>')
-        # run viterbi
-        vet = calculate_matrix(newSent, pos, tags, uni)
+        # run matrix calculations
+        res = calculate_matrix(newSent, pos, tags, uni)
         # print the pos tag of each word
         # skip the CLOSE tag
         output = ""
-        for tag in vet['</s>']['CLOSE']['path'][:-1]:
+        for tag in res['</s>']['CLOSE']['path'][:-1]:
             output += tag + ' '
         print(output)
         # does the user want to continue?
